@@ -33,6 +33,8 @@ You will be taken to the workshop instructions.
 
 :image[Console Access]{src="/static/images/aws-event/console_access.png" width=600}
 
-::alert[We will not be using CLI credentials in today's workshop as this workshop uses predeployed IDE.]{type="info"}
+::alert[We will not be using CLI credentials in today's workshop as this workshop uses AWS CloudShell.]{type="info"}
 
-You are now ready for the workshop!
+## Proceed to the workshop
+
+You are now ready for the workshop. Execute the AWS CloudShell workshop setup as specified [here](/0_getting-started/02-own-account.html)
