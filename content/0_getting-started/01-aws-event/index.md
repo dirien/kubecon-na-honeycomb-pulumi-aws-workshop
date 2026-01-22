@@ -35,6 +35,5 @@ You will be taken to the workshop instructions.
 
 ::alert[We will not be using CLI credentials in today's workshop as this workshop uses AWS CloudShell.]{type="info"}
 
-## Proceed to the workshop
 
-You are now ready for the workshop. Execute the AWS CloudShell workshop setup as specified [here](/0_getting-started/02-own-account.html)
+You are now ready for the workshop!
