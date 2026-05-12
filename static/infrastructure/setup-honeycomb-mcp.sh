@@ -110,13 +110,25 @@ fi
 
 # --- Step 3: Register Honeycomb MCP server ---
 
-# Tools to allowlist (read-only operations only)
+# Tools to allowlist on the Honeycomb MCP server.
+#
+# AWS validates this list against what the MCP server actually exposes for your
+# tenant; if any tool here isn't available on your account (e.g. `get_slos`
+# when SLOs aren't enabled for your team, or older tenants that lack
+# `canvas_agent_*`), the associate-service call will return:
+#
+#   ValidationException: The following tools are not available in MCP server
+#   'honeycomb': <names>
+#
+# Resolution is just to prune those names from this list and re-run the script.
 TOOLS_JSON='[
   "run_query", "run_bubbleup", "get_trace",
   "get_dataset", "get_dataset_columns", "find_columns",
   "find_queries", "get_query_results", "get_triggers",
   "get_workspace_context", "get_environment",
-  "list_boards"
+  "list_boards", "list_semconv_namespaces", "search_semconv",
+  "get_semconv_attribute", "refinery_docs", "create_board", "feedback",
+  "canvas_agent_invoke", "canvas_agent_poll_response"
 ]'
 
 echo ""
@@ -167,7 +179,13 @@ elif command -v xdg-open >/dev/null 2>&1; then
   xdg-open "$AUTH_URL"
 fi
 
-echo "    Authorize the connection in Honeycomb, then press Enter to continue..."
+echo "    Authorize the connection in Honeycomb, then press Enter to continue."
+echo ""
+echo "    NOTE: After approving in Honeycomb you may land on a '404 page not"
+echo "    found' from the AWS DevOps Agent console. That's a benign 404 from"
+echo "    AWS's post-callback redirect target — the OAuth itself completed"
+echo "    successfully and the registration is live. Just come back here and"
+echo "    press Enter."
 read -r
 
 # --- Step 4: Associate Honeycomb MCP with Agent Space ---
