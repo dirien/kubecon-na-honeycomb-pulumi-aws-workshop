@@ -110,6 +110,14 @@ Resources:
                   - aidevops:EndChatForCase
                   - aidevops:DescribeSupportLevel
                   - aidevops:SendChatMessage
+                  # On-Demand Tasks (Chat) actions required for AgentSpaces
+                  # not auto-provisioned via the AWS Console flow. Without
+                  # these, the chat panel in the DevOps Agent web app errors
+                  # on "missing IAM permissions". See:
+                  # https://docs.aws.amazon.com/devopsagent/latest/userguide/working-with-devops-agent-on-demand-devops-tasks.html#enabling-chat-in-your-agent-space
+                  - aidevops:ListChats
+                  - aidevops:CreateChat
+                  - aidevops:SendMessage
                 Resource: !Sub 'arn:aws:aidevops:us-east-1:${AWS::AccountId}:agentspace/*'
               - Sid: AllowSupportOperatorActions
                 Effect: Allow
